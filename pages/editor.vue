@@ -22,8 +22,8 @@ onMounted(() => {
   }
   width.value = document.querySelector('.editor')?.getBoundingClientRect().width || 0
   height.value = window.innerHeight - (document.querySelector('.editor-navbar')?.clientHeight || 0)
-  y.value = height.value * (top.value)
-  x.value = width.value / 2
+  y.value = height.value * top.value
+  x.value = width.value * left.value
 })
 
 
