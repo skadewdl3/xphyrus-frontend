@@ -32,14 +32,15 @@ export default defineNuxtConfig({
 				imports: ['defineStore', 'createPinia', 'storeToRefs'],
 			},
 		],
-		dirs: ['./store/**'],
+
+		dirs: ['./store/**', './layouts/**'],
 	},
 
 	// Setup aliases for easy access to directories
 	alias: {
 		'@': '/',
 		'@components': '/components',
-		'@components': '/composables',
+		'@composables': '/composables',
 		'@assets': '/assets',
 		'@pages': '/pages',
 		'@store': '/store',
