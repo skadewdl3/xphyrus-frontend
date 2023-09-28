@@ -1,13 +1,11 @@
 <script lang="ts" setup>
-// @ts-nocheck
-
 import { VAceEditor } from 'vue3-ace-editor'
 import { config, edit } from 'ace-builds'
 
 const content = ref('')
 const backgroundColor = ref('#fff')
 
-
+const height = ref(0)
 
 const themes: { [key: string]: { name: string; module: Promise<any> } } = {
 	chrome: {
@@ -59,7 +57,6 @@ const modes: { [key: string]: { name: string; module: Promise<any> } } = {
 	},
 }
 
-
 const store = useEditorStore()
 const { mode, fontSize, theme } = toRefs(store)
 const { setTheme, setMode, setFontSize } = store
@@ -70,18 +67,19 @@ config.setModuleUrl('ace/mode/c_cpp', modeModule)
 config.setModuleUrl('ace/theme/twilight', themeModule)
 
 onMounted(async () => {
-  backgroundColor.value = getComputedStyle(
-    document.querySelector('.ace_editor')
-  ).backgroundColor
+	let el = document.querySelector('.ace_editor')
+	if (!el) return
+	backgroundColor.value = getComputedStyle(el).backgroundColor
+	height.value = (document.querySelector('.editor-options')?.clientHeight || 0)
+  // console.log(height.value)
 })
 
-
 watch(theme, async () => {
-  let name = theme.value
-  if (!(name in themes)) return
+	let name = theme.value
+	if (!(name in themes)) return
 	let module = await themes[name].module
-  setTheme(name)
-  console.log('this ran for ', name)
+	setTheme(name)
+	console.log('this ran for ', name)
 	config.setModuleUrl(`ace/theme/${name}`, module)
 	edit('ace_editor').setTheme(`ace/theme/${name}`)
 	backgroundColor.value = getComputedStyle(
@@ -90,12 +88,12 @@ watch(theme, async () => {
 })
 
 watch(mode, async () => {
-  let name = mode.value
-  if (!(name in modes)) return
-  let module = await modes[name].module
-  setMode(name)
-  config.setModuleUrl(`ace/mode/${name}`, module)
-  edit('ace_editor').getSession().setMode(`ace/mode/${name}`)
+	let name = mode.value
+	if (!(name in modes)) return
+	let module = await modes[name].module
+	setMode(name)
+	config.setModuleUrl(`ace/mode/${name}`, module)
+	edit('ace_editor').getSession().setMode(`ace/mode/${name}`)
 })
 </script>
 
@@ -104,7 +102,7 @@ watch(mode, async () => {
 		class="editor-options flex items-center justify-between p-2"
 		:style="`background: ${backgroundColor};  border-top-right-radius: 0.5rem; border-top-left-radius: 0.5rem`"
 	>
-    <div class="editor-options-left flex items-center">
+		<div class="editor-options-left flex items-center">
 			<Dropdown :open="false" class="mr-2">
 				<template #name>
 					<button
@@ -141,30 +139,29 @@ watch(mode, async () => {
 					</div>
 				</template>
 			</Dropdown>
-    </div>
-    <div class="editor-options-right flex items-center">
-      <!-- two buttons to increase and decrease font size-->
-      <button
-        class="bg-transparent border-solid border-[1px] border-primary px-4 py-2 rounded text-primary mr-2"
-        @click="setFontSize(fontSize - 3)"
-      >
-        -
-      </button>
-      <button
-        class="bg-transparent border-solid border-[1px] border-primary px-4 py-2 rounded text-primary"
-        @click="setFontSize(fontSize + 3)"
-      >
-        +
-      </button>
-    </div>
+		</div>
+		<div class="editor-options-right flex items-center">
+			<!-- two buttons to increase and decrease font size-->
+			<button
+				class="bg-transparent border-solid border-[1px] border-primary px-4 py-2 rounded text-primary mr-2"
+				@click="setFontSize(fontSize - 2)"
+			>
+				-
+			</button>
+			<button
+				class="bg-transparent border-solid border-[1px] border-primary px-4 py-2 rounded text-primary"
+				@click="setFontSize(fontSize + 2)"
+			>
+				+
+			</button>
+		</div>
 	</div>
 	<VAceEditor
 		v-model:value="content"
 		:lang="mode"
 		:theme="theme"
-		:style="`height: 100%; font-size: ${fontSize}px; border-bottom-right-radius: 0.5rem; border-bottom-left-radius: 0.5rem`"
+		:style="`height: calc(100% - ${height}px); font-size: ${fontSize}px; border-bottom-right-radius: 0.5rem; border-bottom-left-radius: 0.5rem`"
 		id="ace_editor"
-    
 	/>
 </template>
 
