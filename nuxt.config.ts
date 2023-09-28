@@ -33,7 +33,7 @@ export default defineNuxtConfig({
 			},
 		],
 
-		dirs: ['./store/**', './layouts/**'],
+		dirs: ['./store/**', './layouts/**', './utils/**'],
 	},
 
 	// Setup aliases for easy access to directories

@@ -66,12 +66,13 @@ let themeModule = await themes[theme.value].module
 config.setModuleUrl('ace/mode/c_cpp', modeModule)
 config.setModuleUrl('ace/theme/twilight', themeModule)
 
+
+
 onMounted(async () => {
 	let el = document.querySelector('.ace_editor')
 	if (!el) return
 	backgroundColor.value = getComputedStyle(el).backgroundColor
 	height.value = (document.querySelector('.editor-options')?.clientHeight || 0)
-  // console.log(height.value)
 })
 
 watch(theme, async () => {
@@ -79,11 +80,10 @@ watch(theme, async () => {
 	if (!(name in themes)) return
 	let module = await themes[name].module
 	setTheme(name)
-	console.log('this ran for ', name)
 	config.setModuleUrl(`ace/theme/${name}`, module)
 	edit('ace_editor').setTheme(`ace/theme/${name}`)
 	backgroundColor.value = getComputedStyle(
-		document.querySelector('.ace_editor')
+		document.querySelector('.ace_editor') as HTMLElement
 	).backgroundColor
 })
 

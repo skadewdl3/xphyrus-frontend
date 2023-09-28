@@ -1,26 +1,20 @@
 import { useStorage } from '@vueuse/core'
 
-const getFromLocalStorage = (key: string) => {
-	const value = localStorage.getItem(key)
-	if (value) {
-		return JSON.parse(value)
-	}
-	return null
-}
 
 export const useEditorStore = defineStore('editor', () => {
-	const editor = useStorage(
-		'editor',
-		getFromLocalStorage('editor') || {
-			mode: 'c_cpp',
-			theme: 'chrome',
-			fontSize: 14,
-		}
-	)
+	const editor = useStorage('editor', {
+		mode: 'c_cpp',
+		theme: 'chrome',
+		fontSize: 14,
+		top: 0.5,
+		left: 0.5,
+	})
 
 	const theme = ref(editor.value.theme)
 	const mode = ref(editor.value.mode)
 	const fontSize = ref(editor.value.fontSize)
+	const top = ref(editor.value.top)
+	const left = ref(editor.value.left)
 
 	const setMode = (newMode: string) => {
 		editor.value.mode = newMode
@@ -34,13 +28,34 @@ export const useEditorStore = defineStore('editor', () => {
 		editor.value.fontSize = newFontSize
 		fontSize.value = newFontSize
 	}
+	const setTop = (newTop: number) => {
+		editor.value.top = newTop
+		top.value = newTop
+	}
+	const setLeft = (newLeft: number) => {
+		editor.value.left = newLeft
+		left.value = newLeft
+	}
+	const setEditor = (newEditor: any) => {
+		editor.value = newEditor
+		theme.value = newEditor.theme
+		mode.value = newEditor.mode
+		fontSize.value = newEditor.fontSize
+		top.value = newEditor.top
+		left.value = newEditor.left
+	}
 
 	return {
 		theme,
 		mode,
 		fontSize,
+		top,
+		left,
 		setTheme,
 		setMode,
 		setFontSize,
+		setTop,
+		setLeft,
+		setEditor,
 	}
 })
