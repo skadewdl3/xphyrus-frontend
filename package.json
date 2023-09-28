@@ -24,7 +24,10 @@
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.0",
     "@pinia/nuxt": "^0.4.11",
+    "i": "^0.3.7",
+    "npm": "^10.1.0",
     "pinia": "^2.1.6",
+    "vue3-ace-editor": "^2.2.3",
     "vue3-draggable-resizable": "^1.6.5"
   }
 }

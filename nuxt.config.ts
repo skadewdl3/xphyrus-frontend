@@ -20,7 +20,7 @@ export default defineNuxtConfig({
 	// Rendering mode configuration for different routes
 	routeRules: {
 		'/': { prerender: true },
-		'/editor': { ssr: false },
+		'/editor': { ssr: true },
 		'/api/**': { cors: true },
 	},
 
