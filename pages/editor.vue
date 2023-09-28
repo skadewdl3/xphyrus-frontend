@@ -58,7 +58,7 @@ const handleDragStart = (e: DragEvent) => {
     <div class="editor-code h-full">
       <Editor />
     </div>
-    <div class="resizer absolute h-0.5 bg-blue-400 z-40 hover:cursor-ns-resize w-full" :style="`top: ${y}px`" @dragstart="handleDragStart" @drag="handleVerticalDrag" draggable="true"></div>
+    <div class="resizer absolute h-0.5 z-40 hover:cursor-ns-resize w-full" :style="`top: ${y}px`" @dragstart="handleDragStart" @drag="handleVerticalDrag" draggable="true"></div>
     <div class="editor-output h-full bg-green-400">
 
       <span>Output</span>
