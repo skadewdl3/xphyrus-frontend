@@ -1,21 +1,29 @@
 <script lang="ts" setup>
+import heroImage from '@assets/images/hero.svg'
 const { count, setCount } = toRefs(useTestStore())
 
 definePageMeta({
-  layout: 'index' 
+  layout: 'index',
 })
 </script>
 
 <template>
 
-    <!-- <p class="text-8xl">{{ count }}</p>
-    <button
-      class="bg-blue-400 px-4 py-2 rounded active:translate-y-1 transition-all"
-      @click="setCount(count + 1)"
-    >
-      Increment
-    </button> -->
+  <div class="hero text-center font-display">
+    <div class="hero-image">
+      <img :src="heroImage" class="inline-block w-[95%] sm:w-3/4 md:w-3/5 lg:w-1/2 xl:w-2/5" alt="Hero Image">
+    </div>
+    <div class="hero-text mt-12">
+      <h1 class="title lg:text-5xl sm:text-4xl text-3xl">Welcome to <span class="text-primary">.xphyrus</span></h1>
+      <h3 class="subtitle md:text-lg text-md  mt-2">A Microservice based OA platform</h3>
+    </div>
+    <div class="hero-cta inline-flex items-center justify-center mt-8">
+      <button class="bg-primary px-4 py-2 rounded text-white hover:bg-white border-solid border-primary border-[1px] hover:text-primary mr-2 active:translate-y-0.5 transition-all">Login</button>
+      <button  class="bg-primary px-4 py-2 rounded text-white hover:bg-white border-solid border-primary border-[1px] hover:text-primary ml-2 active:translate-y-0.5 transition-all">Register</button>
+    </div>
+  </div>
 
 </template>
 
-<style lang="stylus"></style>
+<style lang="stylus">
+</style>

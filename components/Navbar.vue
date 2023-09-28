@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { MenuOutlined } from '@ant-design/icons-vue'
 
-const menu = ref(true)
+const menu = ref(false)
 const toggleMenu = () => {
   menu.value = !menu.value
 }
@@ -9,12 +9,10 @@ const toggleMenu = () => {
 
 <template>
 	<nav
-		class="w-full px-4 2xl:px-60 xl:px-40 lg:px-28 md:px-20 sm:px-10 flex items-center justify-between py-4 font-display"
+		class="navbar w-full px-4 2xl:px-60 xl:px-40 lg:px-28 md:px-20 sm:px-10 flex items-center justify-between py-2 font-display"
 	>
-		<NuxtLink to="/">
-			<div class="navbar-logo cursor-pointer">
-				<h1 class="text-3xl">.xphyrus</h1>
-			</div>
+		<NuxtLink to="/" class="cursor-pointer">
+				<h1 class="text-3xl text-primary">.xphyrus</h1>
 		</NuxtLink>
 
 		<div class="navbar-links items-center justify-end hidden md:flex">
@@ -24,8 +22,8 @@ const toggleMenu = () => {
 		</div>
 
 		<!-- TODO: Make a mobile menu -->
-		<div class="navbar-links-menu md:hidden flex items-center" @click="toggleMenu">
-			<MenuOutlined />
+		<div class="navbar-links-menu md:hidden flex items-center cursor-pointer" @click="toggleMenu">
+			<!-- <MenuOutlined /> -->
 		</div>
 
     <Teleport to="body">

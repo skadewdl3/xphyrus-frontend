@@ -8,7 +8,11 @@ module.exports = {
 		'./app.vue',
 	],
 	theme: {
-		extend: {},
+		extend: {
+			colors: {
+				primary: '#6c63ff',
+			},
+		},
 		fontFamily: {
 			display: ['Montserrat', 'sans-serif'],
 			body: ['Poppins', 'sans-serif'],
