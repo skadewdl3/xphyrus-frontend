@@ -12,6 +12,7 @@
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "autoprefixer": "^10.4.16",
+    "daisyui": "^3.8.1",
     "nuxt": "^3.7.4",
     "postcss": "^8.4.30",
     "stylus": "^0.60.0",
@@ -21,6 +22,7 @@
     "vue": "latest"
   },
   "dependencies": {
+    "@ant-design/icons-vue": "^7.0.0",
     "@pinia/nuxt": "^0.4.11",
     "pinia": "^2.1.6"
   }
