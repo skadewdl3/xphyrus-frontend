@@ -15,7 +15,7 @@ export default defineNuxtConfig({
 	},
 
 	// Modules needed for the app
-	modules: ['@pinia/nuxt'],
+	modules: ['@pinia/nuxt', '@vueuse/nuxt'],
 
 	// Rendering mode configuration for different routes
 	routeRules: {

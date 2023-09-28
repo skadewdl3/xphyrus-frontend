@@ -28,7 +28,7 @@ const toggleDropdown = (e: Event) => {
 
 <template>
 <div class="dropdown relative" :style="`height: ${height}px; width: ${width}px`">
-  <div class="dropdown-trigger absolute z-0" @click="toggleDropdown">
+  <div class="dropdown-trigger whitespace-nowrap  absolute z-0" @click="toggleDropdown">
     <slot class="dropdown-trigger-text" name="name" />
   </div>
   <Transition name="scale">

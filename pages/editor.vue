@@ -12,7 +12,9 @@ definePageMeta({
     <span>Instructions</span>
   <div class="editor-right grid grid-rows-2">
     <div class="editor-code h-full">
-      <span><Editor /></span>
+      <ClientOnly>
+        <Editor />
+      </ClientOnly>
 
     </div>
     <div class="editor-output h-full bg-green-400">
