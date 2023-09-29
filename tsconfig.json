@@ -10,5 +10,8 @@
     "./store/*",
     "./composables/*",
     "./.nuxt/*"  
+  ],
+  "exclude": [
+    "node_modules/**/*"
   ]
 }

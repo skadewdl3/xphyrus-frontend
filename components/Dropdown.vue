@@ -3,21 +3,31 @@ const props = defineProps({
   open: Boolean,
 })
 
+// Used to store the height and width of the dropdown trigger
+// which is calculated dynamically
 const height = ref(0)
 const width = ref(0)
+
+// Whether the dropdown is open or closed
 const open = ref(props.open)
 
 onMounted(() => {
+  // When component is mounted, calculate the height
+  // and width of the dropdown trigger
 	height.value = (document.querySelector('.dropdown-trigger')?.clientHeight || 0)
 	width.value = (document.querySelector('.dropdown-trigger')?.clientWidth || 0)
 })
 
-
+// Closes the dropdown and removes the click listener on the body
+// which closes dropdown on cicking outside
 const closeDropdown = () => {
   open.value = false
   document.body.removeEventListener('click', closeDropdown)
 }
 
+// Closes the dropdown if open.
+// Opens the dropdown if closed and sets a listener on the body
+// which closes it (i.e. on clicking outside)
 const toggleDropdown = (e: Event) => {
   open.value = !open.value
   e.stopPropagation()
@@ -27,11 +37,19 @@ const toggleDropdown = (e: Event) => {
 </script>
 
 <template>
+  <!-- Relative posisiotned wrapper for the dropdown to keep alignment for outside elements -->
+
 <div class="dropdown relative" :style="`height: ${height}px; width: ${width}px`">
+  
+  <!-- Dropdown trigger. Can be anything specified in the "name" slot -->
   <div class="dropdown-trigger whitespace-nowrap  absolute z-0" @click="toggleDropdown">
     <slot class="dropdown-trigger-text" name="name" />
   </div>
+
+  <!-- Transition element which scales the dropdown on open/close -->
   <Transition name="scale">
+
+    <!-- Dropdown items. Can be anything inside the "items" slot -->
     <div class="dropdown-trigger-list absolute z-10 origin-top-left rounded overflow-hidden" :style="`top: ${height + 2}px`" v-if="open" >
       <slot  name="items" />
     </div>
@@ -40,12 +58,13 @@ const toggleDropdown = (e: Event) => {
 </template>
 
 <style lang="stylus">
-
+// Sets dropdown to transition smoothly which scaling
 .scale-enter-active,
 .scale-leave-active {
   transition: all 0.1s ease;
 }
 
+// Dropdown expands from and reduces to scale(0.95) and opeaicty 0
 .scale-enter-from,
 .scale-leave-to {
   transform: scale(0.95);

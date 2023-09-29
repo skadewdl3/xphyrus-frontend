@@ -31,10 +31,11 @@ const props = defineProps({
 </script>
 
 <template>
-
-  <!-- Render a secondary button is secondary prop is true -->
-  <button v-if="props.secondary" class="bg-transparent border-solid border-[1px] border-primary px-4 py-2 rounded text-primary transition-all" :class="{'active:translate-y-0.5': props.animate}">{{ props.text }}</button>
-  
-  <!-- Render a primary button by default -->
-  <button v-else-if="props.primary" class="bg-primary px-4 py-2 rounded text-white hover:bg-white border-solid border-primary border-[1px] hover:text-primary transition-all" :class="{'active:translate-y-0.5': props.animate}">{{ props.text }}</button>
+  <div class="button-container">
+    <!-- Render a secondary button is secondary prop is true -->
+    <button v-if="props.secondary" class="bg-transparent border-solid border-[1px] border-primary px-4 py-2 rounded text-primary transition-all" :class="{'active:translate-y-0.5': props.animate}">{{ props.text }}</button>
+    
+    <!-- Render a primary button by default -->
+    <button v-else-if="props.primary" class="bg-primary px-4 py-2 rounded text-white hover:bg-white border-solid border-primary border-[1px] hover:text-primary transition-all" :class="{'active:translate-y-0.5': props.animate}">{{ props.text }}</button>
+  </div>
 </template>
