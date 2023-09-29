@@ -16,6 +16,7 @@ export const useEditorStore = defineStore('editor', () => {
 	const top = ref(editor.value.top)
 	const left = ref(editor.value.left)
 
+
 	const setMode = (newMode: string) => {
 		editor.value.mode = newMode
 		mode.value = newMode

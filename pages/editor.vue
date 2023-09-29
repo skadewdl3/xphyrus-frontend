@@ -6,8 +6,6 @@ const { setTop, setLeft, setEditor } = store
 const x = ref(0)
 const y = ref(0)
 const { x: mouseX, y: mouseY } = useMouse()
-// const left = ref(0.5)
-// const top = ref(0.5)
 const width = ref(0)
 const height = ref(0)
 

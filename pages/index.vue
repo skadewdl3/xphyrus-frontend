@@ -18,8 +18,8 @@ definePageMeta({
       <h3 class="subtitle md:text-lg text-md  mt-2">A Microservice based OA platform</h3>
     </div>
     <div class="hero-cta inline-flex items-center justify-center mt-8">
-      <button class="bg-primary px-4 py-2 rounded text-white hover:bg-white border-solid border-primary border-[1px] hover:text-primary mr-2 active:translate-y-0.5 transition-all">Login</button>
-      <button  class="bg-primary px-4 py-2 rounded text-white hover:bg-white border-solid border-primary border-[1px] hover:text-primary ml-2 active:translate-y-0.5 transition-all">Register</button>
+      <Button text="Login" class="mr-2" animate />
+      <Button text="Register" animate />
     </div>
   </div>
 
