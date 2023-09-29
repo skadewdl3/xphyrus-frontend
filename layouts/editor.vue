@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
+import { getAbsoluteHeight } from '@utils/utils'
 
 const height = ref(0)
 
 onMounted(() => {
-	height.value = window.innerHeight - (document.querySelector('.editor-navbar')?.clientHeight || 0)
+	height.value = window.innerHeight - (getAbsoluteHeight('.editor-navbar') || 0)
 })
 </script>
 
 <template>
   <EditorNavbar />
-	<main class="w-full" :style="`height: ${height}px`">
+	<main class="w-[99%] mx-auto" :style="`height: ${height}px`">
 		<Head>
 			<title>.xphyrus - Editor</title>
 		</Head>

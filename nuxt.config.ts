@@ -44,6 +44,7 @@ export default defineNuxtConfig({
 		'@assets': '/assets',
 		'@pages': '/pages',
 		'@store': '/store',
+		'@utils': '/utils',
 		// Add more aliases as needed...
 	},
 

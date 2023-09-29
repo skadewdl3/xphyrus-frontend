@@ -14,13 +14,13 @@ const store = useEditorStore()
 // Have to convert the objects to refs
 // for reactive updates
 const { mode, fontSize, theme, secondaryColor } = toRefs(store)
+const themeColor = computed(() => themesArray[theme.value].color)
 
 // Use these setter functions to update the store
 // as they update the local storage as well
 const { setTheme, setMode, setFontSize } = store
 
 onMounted(async () => {
-
 	// Load the theme and mode from local storage
 	// Dynamic import these modules
 	let modeModule = await modesArray[mode.value].module
@@ -29,10 +29,10 @@ onMounted(async () => {
 	// Set the code editor to use the improted theme and mode
 	config.setModuleUrl(`ace/mode/${modesArray[mode.value].name}`, modeModule)
 	config.setModuleUrl(`ace/theme/${themesArray[theme.value].name}`, themeModule)
-	
+
 	// Set the height to the height of the editor options panel
 	// This is used to calculate correct height for the code editor
-	height.value = (document.querySelector('.editor-options')?.clientHeight || 0)
+	height.value = document.querySelector('.editor-options')?.clientHeight || 0
 })
 
 // Whenever user selects new theme
@@ -61,10 +61,9 @@ watch(mode, async () => {
 <template>
 	<div
 		class="editor-options flex items-center justify-between p-2"
-		:style="`background: ${secondaryColor};  border-top-right-radius: 0.5rem; border-top-left-radius: 0.5rem`"
+		:style="`background: ${secondaryColor};`"
 	>
 		<div class="editor-options-left flex items-center">
-
 			<!-- Dropdown for language mode selection -->
 
 			<Dropdown :open="false" class="mr-2">
@@ -75,7 +74,11 @@ watch(mode, async () => {
 				<!-- Dynamically render all mode options from themesArray -->
 				<template #items>
 					<div
-						class="px-4 py-2 bg-white hover:bg-gray-200 cursor-pointer"
+						class="px-4 py-2 cursor-pointer"
+						:class="{
+							'text-black bg-white hover:bg-[#eee]': themeColor == 'light',
+							'text-white bg-black hover:bg-[#111]': themeColor == 'dark',
+						}"
 						v-for="(value, key) in modesArray"
 						@click="setMode(key as string)"
 					>
@@ -86,7 +89,10 @@ watch(mode, async () => {
 
 			<!-- Dropdown for theme selection -->
 
-			<Dropdown :open="false" class="mr-2">
+			<Dropdown
+				:open="false"
+				
+			>
 				<template #name>
 					<Button :text="themesArray[theme].name" secondary />
 				</template>
@@ -94,7 +100,11 @@ watch(mode, async () => {
 				<!-- Dynamically render all theme options from themesArray -->
 				<template #items>
 					<div
-						class="px-4 py-2 bg-white hover:bg-gray-200 cursor-pointer"
+						class="px-4 py-2 cursor-pointer"
+						:class="{
+					'text-black bg-white hover:bg-[#eee]': themeColor == 'light',
+					'text-white bg-black hover:bg-[#111]': themeColor == 'dark',
+				}"
 						v-for="(value, key) in themesArray"
 						@click="setTheme(key as string)"
 					>
@@ -105,12 +115,15 @@ watch(mode, async () => {
 		</div>
 
 		<!-- Buttons for controlling the font size of the editor -->
-		
+
 		<div class="editor-options-right flex items-center">
-			
-			<Button text="-" class="mr-2" @click="setFontSize(fontSize - 2)" secondary />
+			<Button
+				text="-"
+				class="mr-2"
+				@click="setFontSize(fontSize - 2)"
+				secondary
+			/>
 			<Button text="+" @click="setFontSize(fontSize + 2)" secondary />
-			
 		</div>
 	</div>
 
