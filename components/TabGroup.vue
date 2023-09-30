@@ -17,7 +17,6 @@ const activeIndex = ref(0);
 onMounted(() => {
   if (tabGroup.value) {
 		Array.from(tabGroup.value.children).forEach((el, i) => {
-			console.log(i)
 			el.addEventListener('click', () => {
 				activeIndex.value = i;
 			})

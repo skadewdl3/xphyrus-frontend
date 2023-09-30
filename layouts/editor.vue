@@ -11,7 +11,7 @@ onMounted(() => {
 
 <template>
   <EditorNavbar />
-	<main class="w-[99%] mx-auto" :style="`height: ${height}px`">
+	<main class="w-[99%] mx-auto my-auto" :style="`height: ${height}px`">
 		<Head>
 			<title>.xphyrus - Editor</title>
 		</Head>

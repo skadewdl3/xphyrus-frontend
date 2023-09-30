@@ -1,22 +1,17 @@
 <script lang="ts" setup>
 const props = defineProps({
-  open: Boolean,
+  open: {
+    type: Boolean,
+    default: false
+  } 
 })
 
-// Used to store the height and width of the dropdown trigger
-// which is calculated dynamically
-const height = ref(0)
-const width = ref(0)
+const trigger = ref<HTMLElement | null>(null);
+const { width, height } = useElementSize(trigger)
+
 
 // Whether the dropdown is open or closed
 const open = ref(props.open)
-
-onMounted(() => {
-  // When component is mounted, calculate the height
-  // and width of the dropdown trigger
-	height.value = (document.querySelector('.dropdown-trigger')?.clientHeight || 0)
-	width.value = (document.querySelector('.dropdown-trigger')?.clientWidth || 0)
-})
 
 // Closes the dropdown and removes the click listener on the body
 // which closes dropdown on cicking outside
@@ -42,8 +37,8 @@ const toggleDropdown = (e: Event) => {
 <div class="dropdown relative" :style="`height: ${height}px; width: ${width}px`">
   
   <!-- Dropdown trigger. Can be anything specified in the "name" slot -->
-  <div class="dropdown-trigger whitespace-nowrap  absolute z-0" @click="toggleDropdown">
-    <slot class="dropdown-trigger-text" name="name" />
+  <div class="dropdown-trigger whitespace-nowrap  absolute z-0" ref="trigger" @click="toggleDropdown">
+    <slot class="dropdown-trigger-text" name="name"  :style="`height: ${height}px; width: ${width}px`" />
   </div>
 
   <!-- Transition element which scales the dropdown on open/close -->

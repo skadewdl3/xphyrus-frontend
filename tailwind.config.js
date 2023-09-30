@@ -18,6 +18,7 @@ module.exports = {
 			body: ['Poppins', 'sans-serif'],
 		},
 	},
+	plugins: [require('tailwind-scrollbar')],
 	// plugins: [require('daisyui')],
 	// daisyui: {
 	// 	themes: ['business'],

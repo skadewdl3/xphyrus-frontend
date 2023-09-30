@@ -15,45 +15,45 @@ export const themesArray: {
 	[key: string]: { name: string; module: Promise<any>; color: 'light' | 'dark' }
 } = {
 	chrome: {
-		name: 'Chrome',
+		name: 'Light',
 		module: import('ace-builds/src-noconflict/theme-chrome'),
 		color: 'light',
 	},
 	twilight: {
-		name: 'Twilight',
+		name: 'Dark',
 		module: import('ace-builds/src-noconflict/theme-twilight'),
 		color: 'dark',
 	},
-	tomorrow: {
-		name: 'Tomorrow',
-		module: import('ace-builds/src-noconflict/theme-tomorrow'),
-		color: 'light',
-	},
-	kuroir: {
-		name: 'Kuroir',
-		module: import('ace-builds/src-noconflict/theme-kuroir'),
-		color: 'light',
-	},
-	xcode: {
-		name: 'Xcode',
-		module: import('ace-builds/src-noconflict/theme-xcode'),
-		color: 'light',
-	},
-	textmate: {
-		name: 'Textmate',
-		module: import('ace-builds/src-noconflict/theme-textmate'),
-		color: 'light',
-	},
-	solarized_dark: {
-		name: 'Solarized Dark',
-		module: import('ace-builds/src-noconflict/theme-solarized_dark'),
-		color: 'dark',
-	},
-	solarized_light: {
-		name: 'Solarized Light',
-		module: import('ace-builds/src-noconflict/theme-solarized_light'),
-		color: 'light',
-	},
+	// tomorrow: {
+	// 	name: 'Tomorrow',
+	// 	module: import('ace-builds/src-noconflict/theme-tomorrow'),
+	// 	color: 'light',
+	// },
+	// kuroir: {
+	// 	name: 'Kuroir',
+	// 	module: import('ace-builds/src-noconflict/theme-kuroir'),
+	// 	color: 'light',
+	// },
+	// xcode: {
+	// 	name: 'Xcode',
+	// 	module: import('ace-builds/src-noconflict/theme-xcode'),
+	// 	color: 'light',
+	// },
+	// textmate: {
+	// 	name: 'Textmate',
+	// 	module: import('ace-builds/src-noconflict/theme-textmate'),
+	// 	color: 'light',
+	// },
+	// solarized_dark: {
+	// 	name: 'Solarized Dark',
+	// 	module: import('ace-builds/src-noconflict/theme-solarized_dark'),
+	// 	color: 'dark',
+	// },
+	// solarized_light: {
+	// 	name: 'Solarized Light',
+	// 	module: import('ace-builds/src-noconflict/theme-solarized_light'),
+	// 	color: 'light',
+	// },
 }
 
 export const modesArray: {
