@@ -3,7 +3,7 @@ const props = defineProps({
   open: {
     type: Boolean,
     default: false
-  } 
+  }
 })
 
 const trigger = ref<HTMLElement | null>(null);
@@ -45,7 +45,7 @@ const toggleDropdown = (e: Event) => {
   <Transition name="scale">
 
     <!-- Dropdown items. Can be anything inside the "items" slot -->
-    <div class="dropdown-trigger-list absolute z-10 origin-top-left rounded overflow-hidden" :style="`top: ${height + 2}px`" v-if="open" >
+    <div class="dropdown-trigger-list absolute z-10 rounded overflow-hidden origin-top-left"  :style="`top: ${height + 2}px`" v-if="open" >
       <slot  name="items" />
     </div>
   </Transition>
