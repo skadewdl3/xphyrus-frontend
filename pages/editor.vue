@@ -40,7 +40,7 @@ const x = computed(() => width.value * left.value)
 const y = computed(() => height.value * top.value)
 
 // Temporary array for test cases
-const testCases = [...Array(20)].map((_, i) => i + 1)
+const testCases = [...Array(4)].map((_, i) => i + 1)
 
 // When theme changes, change the background color
 watch(themeColor, () => {

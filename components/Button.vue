@@ -28,7 +28,6 @@ const props = defineProps({
   },
 })
 
-console.log(props.thin)
 </script>
 
 <template>

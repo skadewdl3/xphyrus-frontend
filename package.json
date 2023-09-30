@@ -23,8 +23,10 @@
     "vue": "latest"
   },
   "dependencies": {
-    "@ant-design/icons-vue": "^7.0.0",
+    "@heroicons/vue": "^2.0.18",
     "@pinia/nuxt": "^0.4.11",
+    "@vue-hero-icons/outline": "^1.7.2",
+    "@vue-hero-icons/solid": "^1.7.2",
     "i": "^0.3.7",
     "npm": "^10.1.0",
     "pinia": "^2.1.6",
