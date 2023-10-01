@@ -28,7 +28,7 @@ const FlyOut = defineAsyncComponent(() => import('./Flyout.vue'))
 					<Button :text="modesArray[mode].name" type="secondary" thin />
 				</template>
 
-				<!-- Dynamically render all mode options from themesArray -->
+				<!-- Dynamically render all mode options from modesArray -->
 				<template #items>
 					<div
 						class="px-4 py-2 cursor-pointer text-black bg-white hover:bg-[#eee] dark:text-white dark:bg-black dark:hover:bg-[#111]"

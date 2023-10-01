@@ -10,7 +10,6 @@ const store = useEditorStore()
 
 // Convert top, left to reactive values
 const { top, left, theme } = toRefs(store)
-const themeColor = computed(() => themesArray[theme.value].color)
 
 // Get setters from store. These don't need to be reactive as they are only used to set the values.
 // Use the setters only to modify values as they modify the local storage as well.
@@ -100,7 +99,7 @@ const Editor = defineAsyncComponent(() => import('@components/Editor.vue'))
           <template #tabs="{ activeIndex }">
   
             <p v-for="(caseNum, index) in testCases" class="px-4 py-4 cursor-pointer whitespace-nowrap dark:bg-black bg-white"
-            :style="`background: ${activeIndex == index ? themeColor == 'dark' ? 'black' : 'white' : 'transparent'}`"
+            :style="`background: ${activeIndex == index ? theme == 'twilight' ? 'black' : 'white' : 'transparent'}`"
             >
               Case {{ caseNum }}
             </p>

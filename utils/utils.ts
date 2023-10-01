@@ -73,6 +73,8 @@ export const modesArray: {
 	},
 }
 
+
+
 export const getAbsoluteHeight = (el: HTMLElement | string): number => {
 	// Get the DOM Node if you pass in a string
 	el = typeof el === 'string' ? document.querySelector(el) : el

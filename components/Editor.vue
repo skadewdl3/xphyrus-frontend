@@ -1,7 +1,39 @@
 <script lang="ts" setup>
 import { VAceEditor } from 'vue3-ace-editor'
 import { config, edit } from 'ace-builds'
+import 'ace-builds/src-noconflict/ace'
 
+const themesArray: {
+	[key: string]: { name: string; module: Promise<any>; color: 'light' | 'dark' }
+} = {
+	chrome: {
+		name: 'Light',
+		module: import('ace-builds/src-noconflict/theme-chrome'),
+		color: 'light',
+	},
+	twilight: {
+		name: 'Dark',
+		module: import('ace-builds/src-noconflict/theme-twilight'),
+		color: 'dark',
+	},
+}
+
+const modesArray: {
+	[key: string]: { name: string; module: Promise<any> }
+} = {
+	c_cpp: {
+		name: 'C/C++',
+		module: import('ace-builds/src-noconflict/mode-c_cpp'),
+	},
+	python: {
+		name: 'Python',
+		module: import('ace-builds/src-noconflict/mode-python'),
+	},
+	javascript: {
+		name: 'Javascript',
+		module: import('ace-builds/src-noconflict/mode-javascript'),
+	},
+}
 // The content of the code editor
 const content = ref('')
 
