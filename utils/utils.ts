@@ -61,15 +61,15 @@ export const modesArray: {
 } = {
 	c_cpp: {
 		name: 'C/C++',
-		module: import('ace-builds/src-noconflict/mode-c_cpp'),
+		module: import('/mode-c_cpp.js?url'),
 	},
 	python: {
 		name: 'Python',
-		module: import('ace-builds/src-noconflict/mode-python'),
+		module: import('/mode-python.js?url'),
 	},
 	javascript: {
 		name: 'Javascript',
-		module: import('ace-builds/src-noconflict/mode-javascript'),
+		module: import('/mode-javascript.js?url'),
 	},
 }
 
