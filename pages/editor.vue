@@ -9,7 +9,7 @@ definePageMeta({
 const store = useEditorStore()
 
 // Convert top, left to reactive values
-const { top, left, primaryColor, secondaryColor, theme } = toRefs(store)
+const { top, left, theme } = toRefs(store)
 const themeColor = computed(() => themesArray[theme.value].color)
 
 // Get setters from store. These don't need to be reactive as they are only used to set the values.
@@ -56,6 +56,9 @@ const handleVerticalDrag = (e: DragEvent) => {
 const handleDragStart = (e: DragEvent) => {
   e.dataTransfer?.setDragImage(new Image(), 0, 0)
 }
+
+const MarkdownRenderer = defineAsyncComponent(() => import('@components/MarkdownRenderer.vue'))
+const Editor = defineAsyncComponent(() => import('@components/Editor.vue'))
 </script>
 
 <template>

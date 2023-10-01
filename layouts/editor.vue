@@ -35,7 +35,6 @@ watch(theme, () => {
 		<Head>
 			<title>.xphyrus - Editor</title>
 		</Head>
-		<Body class="bg-[#eee] dark:bg-[#111]"></Body>
 
 		<slot />
 	</main>

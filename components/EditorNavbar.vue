@@ -10,9 +10,7 @@ const toggleMenu = () => {
 	menu.value = !menu.value
 }
 
-// onMounted(() => {
-// 	// 
-// })
+const FlyOut = defineAsyncComponent(() => import('./Flyout.vue'))
 </script>
 
 <template>

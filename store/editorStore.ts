@@ -7,8 +7,6 @@ export const useEditorStore = defineStore('editor', () => {
 		fontSize: 14,
 		top: 0.5,
 		left: 0.5,
-		primaryColor: '#ffffff',
-		secondaryColor: '#ffffff',
 	})
 
 	const theme = ref(editor.value.theme)
@@ -16,8 +14,6 @@ export const useEditorStore = defineStore('editor', () => {
 	const fontSize = ref(editor.value.fontSize)
 	const top = ref(editor.value.top)
 	const left = ref(editor.value.left)
-	const primaryColor = ref(editor.value.primaryColor)
-	const secondaryColor = ref(editor.value.secondaryColor)
 
 	const setMode = (newMode: string) => {
 		editor.value.mode = newMode
@@ -26,13 +22,6 @@ export const useEditorStore = defineStore('editor', () => {
 	const setTheme = (newTheme: string) => {
 		editor.value.theme = newTheme
 		theme.value = newTheme
-		primaryColor.value = getComputedStyle(
-			document.querySelector('.ace_editor') as HTMLElement
-		).backgroundColor
-
-		secondaryColor.value = getComputedStyle(
-			document.querySelector('.ace_gutter') as HTMLElement
-		).background
 	}
 	const setFontSize = (newFontSize: number) => {
 		editor.value.fontSize = newFontSize
@@ -61,8 +50,6 @@ export const useEditorStore = defineStore('editor', () => {
 		fontSize,
 		top,
 		left,
-		primaryColor,
-		secondaryColor,
 		setTheme,
 		setMode,
 		setFontSize,
