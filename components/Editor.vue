@@ -19,12 +19,15 @@ const { setTheme, setMode, setFontSize } = store
 onMounted(async () => {
 	// Load the theme and mode from local storage
 	// Dynamic import these modules
+
 	let modeModule = await modesArray[mode.value].module
 	let themeModule = await themesArray[theme.value].module
 
 	// Set the code editor to use the improted theme and mode
 	config.setModuleUrl(`ace/mode/${modesArray[mode.value].name}`, modeModule)
 	config.setModuleUrl(`ace/theme/${themesArray[theme.value].name}`, themeModule)
+
+	console.log(theme.value)
 
 	// Set the height to the height of the editor options panel
 	// This is used to calculate correct height for the code editor

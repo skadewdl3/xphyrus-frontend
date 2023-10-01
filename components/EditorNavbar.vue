@@ -4,21 +4,20 @@ import { UserCircleIcon, SunIcon, MoonIcon } from '@heroicons/vue/24/outline'
 const store = useEditorStore()
 const { theme, mode } = toRefs(store)
 const { setMode, setTheme } = store
-const themeColor = computed(() => themesArray[theme.value].color)
 
 const menu = ref(false)
 const toggleMenu = () => {
 	menu.value = !menu.value
 }
+
+onMounted(() => {
+	console.log(getFromLocalStorage('editor'))
+})
 </script>
 
 <template>
 	<nav
-		class="w-[99%] mx-auto px-4 flex items-center justify-between py-2 font-display editor-navbar border-solid border-2 rounded-md mt-1"
-		:class="{
-			'bg-black border-[#222]': themeColor == 'dark',
-			'bg-white border-[#ccc]': themeColor == 'light',
-		}"
+		class="w-[99%] mx-auto px-4 flex items-center justify-between py-2 font-display editor-navbar border-solid border-2 rounded-md mt-1 bg-white border-[#ccc] dark:bg-black dark:border-[#222]"
 	>
 		<NuxtLink to="/" class="cursor-pointer">
 			<h1 class="text-2xl text-primary">.xphyrus</h1>
@@ -34,11 +33,7 @@ const toggleMenu = () => {
 				<!-- Dynamically render all mode options from themesArray -->
 				<template #items>
 					<div
-						class="px-4 py-2 cursor-pointer"
-						:class="{
-							'text-black bg-white hover:bg-[#eee]': themeColor == 'light',
-							'text-white bg-black hover:bg-[#111]': themeColor == 'dark',
-						}"
+						class="px-4 py-2 cursor-pointer text-black bg-white hover:bg-[#eee] dark:text-white dark:bg-black dark:hover:bg-[#111]"
 						v-for="(value, key) in modesArray"
 						@click="setMode(key as string)"
 					>
@@ -48,23 +43,15 @@ const toggleMenu = () => {
 			</Dropdown>
 
 			<ClientOnly>
-				<Slider class="w-12 mr-4" :size="26" :on="themeColor == 'dark'" @click="setTheme(themeColor == 'light' ? 'twilight' : 'chrome')">
+				<Slider class="w-12 mr-4" :size="26" :on="theme == 'twilight'" @click="setTheme(theme == 'twilight' ? 'chrome' : 'twilight')">
 					<template #icon="{ on }">
 							<SunIcon
 								v-if="!on"
-								class="w-4"
-								:class="{
-									'text-black': themeColor == 'light',
-									'text-white': themeColor == 'dark',
-								}"
+								class="w-4 text-black dark:text-white"
 							/>
 							<MoonIcon
 								v-if="on"
-								class="w-4"
-								:class="{
-									'text-black': themeColor == 'light',
-									'text-white': themeColor == 'dark',
-								}"
+								class="w-4 text-black dark:text-white"
 							/>
 						
 					</template>
@@ -73,11 +60,7 @@ const toggleMenu = () => {
 
 			<ClientOnly>
 				<UserCircleIcon
-					class="w-7 rounded-full"
-					:class="{
-						'text-black': themeColor == 'light',
-						'text-[#777]': themeColor == 'dark',
-					}"
+					class="w-7 rounded-full text-[#222] dark:text-[#666]"
 				/>
 			</ClientOnly>
 		</div>

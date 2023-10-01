@@ -9,12 +9,12 @@ definePageMeta({
 const store = useEditorStore()
 
 // Load the editor state from local storage if on client
-onMounted(() => {
-  if (process.client) {
-    let savedEditor = getFromLocalStorage('editor')
-    savedEditor && setEditor(savedEditor)
-  }
-})
+// onMounted(() => {
+//   if (process.client) {
+//     let savedEditor = getFromLocalStorage('editor')
+//     savedEditor && setEditor(savedEditor)
+//   }
+// })
 
 // Convert top, left to reactive values
 const { top, left, primaryColor, secondaryColor, theme } = toRefs(store)
@@ -41,11 +41,6 @@ const y = computed(() => height.value * top.value)
 
 // Temporary array for test cases
 const testCases = [...Array(4)].map((_, i) => i + 1)
-
-// When theme changes, change the background color
-watch(themeColor, () => {
-  document.body.style.backgroundColor = themeColor.value == 'dark' ? '#111' : '#eee'
-})
 
 // Handles horizontal resizing of the (editor + output)
 // and the instructions panels
@@ -82,7 +77,7 @@ const handleDragStart = (e: DragEvent) => {
 
   <!-- Instrucitons panel is always in left half of grid -->
   <!-- <span>Instructions</span> -->
-  <div class="editor-instructions px-4 py-2 w-[99%] mx-0 my-auto rounded-md h-[99%] border-solid border-2 " :class="{'bg-black border-[#222] text-white': themeColor == 'dark', 'bg-white border-[#ccc] tetx-black': themeColor == 'light'}">
+  <div class="editor-instructions px-4 py-2 w-[99%] mx-0 my-auto rounded-md h-[99%] border-solid border-2 bg-white border-[#ccc] text-black dark:bg-black dark:border-[#222] dark:text-white">
   sdfd
   </div>
 
@@ -91,7 +86,7 @@ const handleDragStart = (e: DragEvent) => {
   <div class="editor-right grid grid-rows-2 relative w-[100%] my-auto h-[99%]" :style="`grid-template-rows: ${top}fr ${1 - top}fr`">
     
     <!-- Editor is at top of right half of grid -->
-    <div class="editor-code h-[99%] mt-0 border-solid border-2 rounded-md" :class="{'bg-black border-[#222]': themeColor == 'dark', 'bg-white border-[#ccc]': themeColor == 'light'}">
+    <div class="editor-code h-[99%] mt-0 border-solid border-2 rounded-md dark:bg-black dark:border-[#222] bg-white border-[#ccc]">
       <Editor />
     </div>
     
@@ -99,18 +94,17 @@ const handleDragStart = (e: DragEvent) => {
     <div class="resizer absolute h-1 z-40 hover:cursor-ns-resize w-full -translate-y-full" :style="`top: ${y}px`" @dragstart="handleDragStart" @drag="handleVerticalDrag" draggable="true"></div>
     
     <!-- Output in at the bottom of right half of grid -->
-    <div class="editor-output h-[99%] my-auto relative border-solid border-2 px-4 py-2 rounded-md" :class="{'bg-black border-[#222] text-white': themeColor == 'dark', 'bg-white border-[#ccc] text-black': themeColor == 'light'}">
+    <div class="editor-output h-[99%] my-auto relative border-solid border-2 px-4 py-2 rounded-md dark:bg-black dark:border-[#222] dark:text-white bg-white border-[#ccc] text-black">
       <span>Output</span>
 
       <!-- Tab group for switching between test cases -->
       <!-- Tab group provides the activeIndex ref which is index currently active tab -->
-      <div class="output-bottom absolute bottom-0 left-0 w-full flex items-center justify-between" :class="{'bg-[#222]': themeColor == 'dark', 'bg-[#eee]': themeColor == 'light'}">
+      <div class="output-bottom absolute bottom-0 left-0 w-full flex items-center justify-between dark:bg-[#222] bg-[#eee]">
 
         <TabGroup class="mr-2 overflow-auto scrollbar-none">
           <template #tabs="{ activeIndex }">
   
-            <p v-for="(caseNum, index) in testCases" class="px-4 py-4 cursor-pointer whitespace-nowrap"
-            
+            <p v-for="(caseNum, index) in testCases" class="px-4 py-4 cursor-pointer whitespace-nowrap dark:bg-black bg-white"
             :style="`background: ${activeIndex == index ? themeColor == 'dark' ? 'black' : 'white' : 'transparent'}`"
             >
             
@@ -130,8 +124,3 @@ const handleDragStart = (e: DragEvent) => {
   </div>
 </div>
 </template>
-
-<style lang="stylus">
-body 
-  background #eee
-</style>
