@@ -72,8 +72,7 @@ const markdown = ref(md)
 
 let darkStylesheet: any, lightStylesheet: any, highlightDark: any, highlightLight: any
 
-watch(theme, async () => {
-
+const loadStylesheets = async () => {
 
 	let styleSheetTag = document.querySelector('.markdown-stylesheet')
 	let highlightTag = document.querySelector('.highlight-stylesheet')
@@ -109,6 +108,14 @@ watch(theme, async () => {
 		style.innerHTML = highlightInnerHTML
 		document.head.appendChild(style)
 	}
+}
+
+watch(theme, async () => {
+	await loadStylesheets()
+})
+
+onMounted(async () => {
+	await loadStylesheets()
 })
 
 onUnmounted(() => {
