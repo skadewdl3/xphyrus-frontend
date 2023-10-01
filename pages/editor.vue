@@ -69,8 +69,8 @@ const handleDragStart = (e: DragEvent) => {
 
   <!-- Instrucitons panel is always in left half of grid -->
   <!-- <span>Instructions</span> -->
-  <div class="editor-instructions px-4 py-2 w-[99%] mx-0 my-auto rounded-md h-[99%] border-solid border-2 bg-white border-[#ccc] text-black dark:bg-black dark:border-[#222] dark:text-white">
-    <MarkdownRenderer />
+  <div class="editor-instructions px-8 py-8 scrollbar-none w-[99%] max-h-[99%] mx-0 my-auto rounded-md h-[99%] border-solid border-2 bg-white border-[#ccc] text-black dark:bg-black dark:border-[#222] dark:text-white overflow-y-auto">
+    <MarkdownRenderer class="overflow-y-auto" />
   </div>
 
   <!-- The editor and output panels are in the right half of the grid -->
