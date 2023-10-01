@@ -10,9 +10,9 @@ const toggleMenu = () => {
 	menu.value = !menu.value
 }
 
-onMounted(() => {
-	console.log(getFromLocalStorage('editor'))
-})
+// onMounted(() => {
+// 	// 
+// })
 </script>
 
 <template>
@@ -42,8 +42,7 @@ onMounted(() => {
 				</template>
 			</Dropdown>
 
-			<ClientOnly>
-				<Slider class="w-12 mr-4" :size="26" :on="theme == 'twilight'" @click="setTheme(theme == 'twilight' ? 'chrome' : 'twilight')">
+				<Slider class="w-12 mr-4" :theme="theme" :size="26" :on="theme == 'twilight'" @click="setTheme(theme == 'twilight' ? 'chrome' : 'twilight')">
 					<template #icon="{ on }">
 							<SunIcon
 								v-if="!on"
@@ -56,13 +55,12 @@ onMounted(() => {
 						
 					</template>
 				</Slider>
-			</ClientOnly>
 
-			<ClientOnly>
-				<UserCircleIcon
-					class="w-7 rounded-full text-[#222] dark:text-[#666]"
-				/>
-			</ClientOnly>
+			<UserCircleIcon
+				class="w-7 rounded-full text-[#222] dark:text-[#666]"
+			/>
+			<!-- <ClientOnly>
+			</ClientOnly> -->
 		</div>
 
 		<Teleport to="body">

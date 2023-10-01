@@ -1,10 +1,4 @@
 <script setup lang="ts">
-
-const store = useEditorStore()
-const { theme } = toRefs(store)
-const { setTheme } = store
-const themeColor = computed(() => themesArray[theme.value].color)
-
 const props = defineProps({
   size: {
     type: Number,
@@ -16,25 +10,16 @@ const props = defineProps({
   }
 })
 
-const on = ref(props.on)
-let shoudlToggle = true
-
-console.log(on.value)
-
-const toggle = () => {
-  if (!shoudlToggle) return
-  on.value = !on.value
-  shoudlToggle = false
-  let timeout = setTimeout(() => {
-    clearTimeout(timeout)
-    shoudlToggle = true
-  }, 200)
-}
+const { on: isOn } = toRefs(props)
+const on = ref(isOn.value)
+watch(isOn, () => {
+  on.value = isOn.value
+})
 
 </script>
 
 <template>
-<div class="slider relative w-12 h-8" @click="toggle">
+<div class="slider relative w-12 h-8" @click="on = !on">
   <div class="slider-track absolute top-1/2 h-1/2 -translate-y-1/2 left-0 w-full rounded-md bg-[#ccc] dark:bg-[#222]"></div>
 
   <div class="slider-thumb absolute top-1/2 -translate-y-1/2 aspect-square h-3/4 border-solid border-2 rounded-full transition-all flex items-center justify-center bg-white border-[#ccc] dark:bg-black dark:border-[#222]" :class="{'left-[-10%]': !on, 'left-full -translate-x-[90%]': on}" :style="{height: `${props.size}px`}">
