@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 // import VueMarkdown from 'vue3-markdown-it'
 import highlightPlugin from 'markdown-it-highlightjs'
+import { useFetch } from '@vueuse/core';
 
 // Stylesheets for github-style markdown styling 
-// import darkStylesheet from 'github-markdown-css/github-markdown-dark.css?inline'
+// import markdownDark from 'github-markdown-css/github-markdown-dark.css?inline'
 // import lightStylesheet from 'github-markdown-css/github-markdown-light.css?inline'
 
 // Stylesheets for syntax highlighting
@@ -68,44 +69,35 @@ int main() {
 Now, when you run this code, you will see that the output \`Hello World!\` is printed to the standard output. Congratulations! You have written your first C program. Now, let's learn how to submit this program to .xphyrus.
 \n\n\n  
 `
-const markdown = ref(md)
+const markdown = ref('Loading')
 
-let darkStylesheet: any, lightStylesheet: any, highlightDark: any, highlightLight: any
+
+const { data: markdownDark, error, isFetching } =  useFetch<string>('/github-markdown-dark.css')
+const { data: markdownLight, error: error2, isFetching: isFetching2 } =  useFetch<string>('/github-markdown-light.css')
+const { data: highlightDark, error: error3, isFetching: isFetching3 } =  useFetch(<string>'/github-highlight-dark.css')
+const { data: highlightLight, error: error4, isFetching: isFetching4 } =  useFetch<string>('/github-highlight-light.css')
+
 
 const loadStylesheets = async () => {
 
 	let styleSheetTag = document.querySelector('.markdown-stylesheet')
 	let highlightTag = document.querySelector('.highlight-stylesheet')
-	let innerHTML = ''
-	let highlightInnerHTML = ''
+	let innerHTML = theme.value == 'twilight' ? markdownDark.value : markdownLight.value
+	let highlightInnerHTML = theme.value == 'twilight' ? highlightDark.value : highlightLight.value
 
-	if (theme.value == 'twilight') {
-
-		if (!darkStylesheet) darkStylesheet = (await import('github-markdown-css/github-markdown-dark.css?inline')).default
-		if (!highlightDark) highlightDark =  (await import('highlight.js/styles/github-dark.css?inline')).default
-		innerHTML = darkStylesheet
-		highlightInnerHTML = highlightDark
-	}
-	else if (theme.value == 'chrome') {
-		if (!lightStylesheet) lightStylesheet =  (await import('github-markdown-css/github-markdown-light.css?inline')).default
-		if (!highlightLight) highlightLight = (await import('highlight.js/styles/github.css?inline')).default
-		innerHTML = lightStylesheet
-		highlightInnerHTML = highlightLight
-	}
-
-	if (styleSheetTag) styleSheetTag.innerHTML = innerHTML
+	if (styleSheetTag) styleSheetTag.innerHTML = innerHTML as string
 	else {
 		let style = document.createElement('style')
 		style.classList.add('markdown-stylesheet')
-		style.innerHTML = innerHTML
+		style.innerHTML = innerHTML as string
 		document.head.appendChild(style)
 	}
 
-	if (highlightTag) highlightTag.innerHTML = highlightInnerHTML
+	if (highlightTag) highlightTag.innerHTML = highlightInnerHTML as string
 	else {
 		let style = document.createElement('style')
 		style.classList.add('highlight-stylesheet')
-		style.innerHTML = highlightInnerHTML
+		style.innerHTML = highlightInnerHTML as string
 		document.head.appendChild(style)
 	}
 }
@@ -114,8 +106,12 @@ watch(theme, async () => {
 	await loadStylesheets()
 })
 
-onMounted(async () => {
-	await loadStylesheets()
+watch([isFetching, isFetching2, isFetching3, isFetching4], () => {
+	if (!isFetching.value && !isFetching2.value && !isFetching3.value && !isFetching4.value) {
+		// clearInterval(interval)
+		markdown.value = md
+		loadStylesheets()
+	}
 })
 
 onUnmounted(() => {
@@ -127,6 +123,8 @@ onUnmounted(() => {
 })
 
 const VueMarkdown = defineAsyncComponent(() => import('vue3-markdown-it'))
+
+
 </script>
 
 <template>
