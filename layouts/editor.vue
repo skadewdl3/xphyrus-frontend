@@ -18,17 +18,13 @@ onBeforeMount(() => {
 })
 
 onMounted(() => {	
-	const editor = getFromLocalStorage('editor')
-	setEditor(editor)
+	setEditor(getFromLocalStorage('editor'))
 	height.value = window.innerHeight - (getAbsoluteHeight('.editor-navbar') || 0)
 })
 
 watch(theme, () => {
-	if (theme.value === 'twilight') {
-		document.documentElement.classList.add('dark')
-	} else {
-		document.documentElement.classList.remove('dark')
-	}
+	if (theme.value === 'twilight') document.documentElement.classList.add('dark')
+	else document.documentElement.classList.remove('dark')
 })
 
 </script>

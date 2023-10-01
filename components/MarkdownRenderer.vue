@@ -79,11 +79,11 @@ const markdown = ref(md)
 			<link rel="stylesheet" v-if="theme == 'twilight'" :href="highlightDark">
 			<link rel="stylesheet" v-else :href="highlightLight">
 		</Head>
-		<ClientOnly>
-			<VueMarkdown
-				:plugins="plugins"
-				:source="markdown"
-			/>
-		</ClientOnly>
+		<VueMarkdown
+			:plugins="plugins"
+			:source="markdown"
+		/>
+		<!-- <ClientOnly>
+		</ClientOnly> -->
 	</div>
 </template>

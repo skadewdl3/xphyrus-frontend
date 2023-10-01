@@ -59,8 +59,6 @@ const toggleMenu = () => {
 			<UserCircleIcon
 				class="w-7 rounded-full text-[#222] dark:text-[#666]"
 			/>
-			<!-- <ClientOnly>
-			</ClientOnly> -->
 		</div>
 
 		<Teleport to="body">
