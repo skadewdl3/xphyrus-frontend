@@ -44,5 +44,3 @@ watch(theme, () => {
 		<slot />
 	</main>
 </template>
-
-<style lang="stylus"></style>

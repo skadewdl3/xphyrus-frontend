@@ -8,14 +8,6 @@ definePageMeta({
 // Get the editor store
 const store = useEditorStore()
 
-// Load the editor state from local storage if on client
-// onMounted(() => {
-//   if (process.client) {
-//     let savedEditor = getFromLocalStorage('editor')
-//     savedEditor && setEditor(savedEditor)
-//   }
-// })
-
 // Convert top, left to reactive values
 const { top, left, primaryColor, secondaryColor, theme } = toRefs(store)
 const themeColor = computed(() => themesArray[theme.value].color)
@@ -78,7 +70,7 @@ const handleDragStart = (e: DragEvent) => {
   <!-- Instrucitons panel is always in left half of grid -->
   <!-- <span>Instructions</span> -->
   <div class="editor-instructions px-4 py-2 w-[99%] mx-0 my-auto rounded-md h-[99%] border-solid border-2 bg-white border-[#ccc] text-black dark:bg-black dark:border-[#222] dark:text-white">
-  sdfd
+    <MarkdownRenderer />
   </div>
 
   <!-- The editor and output panels are in the right half of the grid -->
@@ -107,9 +99,7 @@ const handleDragStart = (e: DragEvent) => {
             <p v-for="(caseNum, index) in testCases" class="px-4 py-4 cursor-pointer whitespace-nowrap dark:bg-black bg-white"
             :style="`background: ${activeIndex == index ? themeColor == 'dark' ? 'black' : 'white' : 'transparent'}`"
             >
-            
               Case {{ caseNum }}
-            
             </p>
           </template>
         </TabGroup>

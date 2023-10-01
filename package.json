@@ -27,10 +27,13 @@
     "@pinia/nuxt": "^0.4.11",
     "@vue-hero-icons/outline": "^1.7.2",
     "@vue-hero-icons/solid": "^1.7.2",
+    "github-markdown-css": "^5.2.0",
     "i": "^0.3.7",
+    "markdown-styles": "^3.2.0",
     "npm": "^10.1.0",
     "pinia": "^2.1.6",
     "tailwind-scrollbar": "^3.0.5",
+    "vue-markdown-render": "^2.0.1",
     "vue3-ace-editor": "^2.2.3",
     "vue3-draggable-resizable": "^1.6.5"
   }
