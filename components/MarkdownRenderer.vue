@@ -1,52 +1,23 @@
 <script lang="ts" setup>
-// import VueMarkdown from 'vue-markdown-render'
 import VueMarkdown from 'vue3-markdown-it'
 import highlightPlugin from 'markdown-it-highlightjs'
 
-import darkStylesheet from 'github-markdown-css/github-markdown-dark.css?inline'
-import lightStylesheet from 'github-markdown-css/github-markdown-light.css?inline'
+// Stylesheets for github-style markdown styling 
+import darkStylesheet from 'github-markdown-css/github-markdown-dark.css?url'
+import lightStylesheet from 'github-markdown-css/github-markdown-light.css?url'
 
-import highlightDark from 'highlight.js/styles/github-dark.css?inline'
-import highlightLight from 'highlight.js/styles/github.css?inline'
+// Stylesheets for syntax highlighting
+import highlightDark from 'highlight.js/styles/github-dark.css?url'
+import highlightLight from 'highlight.js/styles/github.css?url'
 
 const { theme } = toRefs(useEditorStore())
+
 
 const plugins = [
 	{
 		plugin: highlightPlugin,
 	},
 ]
-
-const updateStyles = () => {
-	console.log('hi mom')
-	let stylesheetTag = document.querySelector('.markdown-stylesheet')
-	let highlightTag = document.querySelector('.highlight-stylesheet')
-
-	let innerHTML = theme.value == 'twilight' ? darkStylesheet : lightStylesheet
-	let highlightInnerHTML =
-		theme.value == 'twilight' ? highlightDark : highlightLight
-
-	if (stylesheetTag) stylesheetTag.innerHTML = innerHTML
-	else {
-		let styleTag = document.createElement('style')
-		styleTag.classList.add('markdown-stylesheet')
-		styleTag.innerHTML = innerHTML
-		document.head.appendChild(styleTag)
-	}
-	if (highlightTag) highlightTag.innerHTML = highlightInnerHTML
-	else {
-		let styleTag = document.createElement('style')
-		styleTag.classList.add('highlight-stylesheet')
-		styleTag.innerHTML = highlightInnerHTML
-		document.head.appendChild(styleTag)
-	}
-}
-
-watch(theme, updateStyles)
-
-onMounted(() => {
-	updateStyles()
-})
 
 const md = `
 # Your first assignment!
@@ -101,11 +72,18 @@ const markdown = ref(md)
 </script>
 
 <template>
-	<ClientOnly>
-		<VueMarkdown
-			:plugins="plugins"
-			class="markdown-body bg-white dark:bg-black"
-			:source="markdown"
-		/>
-	</ClientOnly>
+	<div class="markdown-body bg-white dark:bg-black">
+		<Head ref="head">
+			<link rel="stylesheet" v-if="theme == 'twilight'" :href="darkStylesheet">
+			<link rel="stylesheet" v-else :href="lightStylesheet">
+			<link rel="stylesheet" v-if="theme == 'twilight'" :href="highlightDark">
+			<link rel="stylesheet" v-else :href="highlightLight">
+		</Head>
+		<ClientOnly>
+			<VueMarkdown
+				:plugins="plugins"
+				:source="markdown"
+			/>
+		</ClientOnly>
+	</div>
 </template>
