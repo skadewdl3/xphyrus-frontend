@@ -57,7 +57,7 @@ const handleDragStart = (e: DragEvent) => {
 }
 
 const MarkdownRenderer = defineAsyncComponent(() => import('@components/MarkdownRenderer.vue'))
-const Editor = defineAsyncComponent(() => import('@components/Editor.vue'))
+// const Editor = defineAsyncComponent(() => import('@components/Editor.vue'))
 </script>
 
 <template>
