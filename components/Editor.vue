@@ -20,6 +20,9 @@ onMounted(async () => {
 	// Load the theme and mode from local storage
 	// Dynamic import these modules
 
+	// set editor base path
+	config.set('basePath', '/')
+
 	let modeModule = await modesArray[mode.value].module
 	let themeModule = await themesArray[theme.value].module
 
