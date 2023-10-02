@@ -15,7 +15,7 @@ const FlyOut = defineAsyncComponent(() => import('./Flyout.vue'))
 
 <template>
 	<nav
-		class="w-[99%] mx-auto px-4 flex items-center justify-between py-2 font-display editor-navbar border-solid border-2 rounded-md mt-1 bg-white border-[#ccc] dark:bg-black dark:border-[#222]"
+		class="w-[99%] mx-auto px-4 flex items-center justify-between py-2 font-display editor-navbar border-solid border-2 rounded-md mt-1 bg-white border-lightgray-400 dark:bg-black dark:border-lightblack-600"
 	>
 		<NuxtLink to="/" class="cursor-pointer">
 			<h1 class="text-2xl text-primary">.xphyrus</h1>
@@ -31,7 +31,7 @@ const FlyOut = defineAsyncComponent(() => import('./Flyout.vue'))
 				<!-- Dynamically render all mode options from modesArray -->
 				<template #items>
 					<div
-						class="px-4 py-2 cursor-pointer text-black bg-white hover:bg-[#eee] dark:text-white dark:bg-black dark:hover:bg-[#111]"
+						class="px-4 py-2 cursor-pointer text-black bg-white hover:bg-lightgray-100 dark:text-white dark:bg-black dark:hover:bg-lightblack-700"
 						v-for="(value, key) in modesArray"
 						@click="setMode(key as string)"
 					>
@@ -55,7 +55,7 @@ const FlyOut = defineAsyncComponent(() => import('./Flyout.vue'))
 				</Slider>
 
 			<UserCircleIcon
-				class="w-7 rounded-full text-[#222] dark:text-[#666]"
+				class="w-7 rounded-full text-lightblack-600 dark:text-[#666]"
 			/>
 		</div>
 

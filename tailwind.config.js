@@ -12,6 +12,10 @@ module.exports = {
 		extend: {
 			colors: {
 				primary: '#6c63ff',
+				'lightblack-600': '#222',
+				'lightblack-700': '#111',
+				'lightgray-400': '#ccc',
+				'lightgray-100': '#eee',
 			},
 		},
 		fontFamily: {

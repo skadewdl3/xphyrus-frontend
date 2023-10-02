@@ -71,7 +71,7 @@ const MarkdownRenderer = defineAsyncComponent(() => import('@components/Markdown
 
   <!-- Instrucitons panel is always in left half of grid -->
   <!-- <span>Instructions</span> -->
-  <div class="editor-instructions px-8 py-8 scrollbar-none w-[99%] max-h-[99%] mx-0 my-auto rounded-md h-[99%] border-solid border-2 bg-white border-[#ccc] text-black dark:bg-black dark:border-[#222] dark:text-white overflow-y-auto">
+  <div class="editor-instructions px-8 py-8 scrollbar-none w-[99%] max-h-[99%] mx-0 my-auto rounded-md h-[99%] border-solid border-2 bg-white border-lightgray-400 text-black dark:bg-black dark:border-lightblack-600 dark:text-white overflow-y-auto">
     <MarkdownRenderer class="overflow-y-auto" />
   </div>
 
@@ -80,7 +80,7 @@ const MarkdownRenderer = defineAsyncComponent(() => import('@components/Markdown
   <div class="editor-right grid grid-rows-2 relative w-[100%] my-auto h-[99%]" :style="`grid-template-rows: ${top}fr ${1 - top}fr`">
     
     <!-- Editor is at top of right half of grid -->
-    <div class="editor-code h-[99%] mt-0 border-solid border-2 rounded-md dark:bg-black dark:border-[#222] bg-white border-[#ccc]">
+    <div class="editor-code h-[99%] mt-0 border-solid border-2 rounded-md dark:bg-black dark:border-lightblack-600 bg-white border-lightgray-400">
       <Editor />
     </div>
     
@@ -88,12 +88,12 @@ const MarkdownRenderer = defineAsyncComponent(() => import('@components/Markdown
     <div class="resizer absolute h-1 z-40 hover:cursor-ns-resize w-full -translate-y-full" :style="`top: ${y}px`" @dragstart="handleDragStart" @drag="handleVerticalDrag" draggable="true"></div>
     
     <!-- Output in at the bottom of right half of grid -->
-    <div class="editor-output h-[99%] my-auto relative border-solid border-2 px-4 py-2 rounded-md dark:bg-black dark:border-[#222] dark:text-white bg-white border-[#ccc] text-black">
+    <div class="editor-output h-[99%] my-auto relative border-solid border-2 px-4 py-2 rounded-md dark:bg-black dark:border-lightblack-600 dark:text-white bg-white border-lightgray-400 text-black">
       <span>Output</span>
 
       <!-- Tab group for switching between test cases -->
       <!-- Tab group provides the activeIndex ref which is index currently active tab -->
-      <div class="output-bottom absolute bottom-0 left-0 w-full flex items-center justify-between dark:bg-[#222] bg-[#eee]">
+      <div class="output-bottom absolute bottom-0 left-0 w-full flex items-center justify-between dark:bg-lightblack-600 bg-lightgray-100">
 
         <TabGroup class="mr-2 overflow-auto scrollbar-none">
           <template #tabs="{ activeIndex }">
