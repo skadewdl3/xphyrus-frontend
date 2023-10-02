@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { sampleMarkdown } from '~/utils/utils';
+
 
 // Use the editor layout
 definePageMeta({
@@ -20,9 +22,11 @@ const { x: mouseX, y: mouseY } = useMouse()
 
 // Reference to editor DOM element
 const editorRef = ref<HTMLElement | null>(null)
+const outputRef = ref<HTMLElement | null>(null)
 
 // Get the width and height of the editor
 const { width, height } = useElementSize(editorRef)
+const { height: outputHeight } = useElementSize(outputRef)
 
 // x and y positions of horizontal and vertical resizers
 // are calculated using the width and height of the editor
@@ -58,6 +62,13 @@ const handleDragStart = (e: DragEvent) => {
 
 const MarkdownRenderer = defineAsyncComponent(() => import('@components/MarkdownRenderer.vue'))
 // const Editor = defineAsyncComponent(() => import('@components/Editor.vue'))
+const outputMarkdown = `
+# This is the output
+\`\`\`txt
+Output: 1 2 3 4 6 5
+Expected Output: 1 2 3 4 5
+\`\`\`
+`
 </script>
 
 <template>
@@ -72,7 +83,7 @@ const MarkdownRenderer = defineAsyncComponent(() => import('@components/Markdown
   <!-- Instrucitons panel is always in left half of grid -->
   <!-- <span>Instructions</span> -->
   <div class="editor-instructions px-8 py-8 scrollbar-none w-[99%] max-h-[99%] mx-0 my-auto rounded-md h-[99%] border-solid border-2 bg-white border-lightgray-400 text-black dark:bg-black dark:border-lightblack-600 dark:text-white overflow-y-auto">
-    <MarkdownRenderer class="overflow-y-auto" />
+    <MarkdownRenderer :markdown="sampleMarkdown" class="overflow-y-auto" />
   </div>
 
   <!-- The editor and output panels are in the right half of the grid -->
@@ -88,12 +99,14 @@ const MarkdownRenderer = defineAsyncComponent(() => import('@components/Markdown
     <div class="resizer absolute h-1 z-40 hover:cursor-ns-resize w-full -translate-y-full" :style="`top: ${y}px`" @dragstart="handleDragStart" @drag="handleVerticalDrag" draggable="true"></div>
     
     <!-- Output in at the bottom of right half of grid -->
-    <div class="editor-output h-[99%] my-auto relative border-solid border-2 px-4 py-2 rounded-md dark:bg-black dark:border-lightblack-600 dark:text-white bg-white border-lightgray-400 text-black">
-      <span>Output</span>
+    <div class="editor-output h-[99%] my-auto relative border-solid border-2 rounded-md dark:bg-black dark:border-lightblack-600 dark:text-white bg-white border-lightgray-400 text-black" ref="outputRef">
+
+      <MarkdownRenderer class="w-full overflow-y-auto absolute top-0 left-0 px-4 py-2 scrollbar-none" :markdown="outputMarkdown" :style="{height: `${outputHeight}px`}" />
 
       <!-- Tab group for switching between test cases -->
       <!-- Tab group provides the activeIndex ref which is index currently active tab -->
       <div class="output-bottom absolute bottom-0 left-0 w-full flex items-center justify-between dark:bg-lightblack-600 bg-lightgray-100">
+
 
         <TabGroup class="mr-2 overflow-auto scrollbar-none">
           <template #tabs="{ activeIndex }">

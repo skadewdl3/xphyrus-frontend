@@ -15,14 +15,15 @@ const { width, height } = useElementSize(trigger)
 const open = ref(props.open)
 
 // Closes the dropdown
-const closeDropdown = () => {
+const closeDropdown = (e: Event) => {
+  e.stopPropagation()
   open.value = false
 }
 
 // Toggles dropdown state
-const toggleDropdown = (e: Event) => {
-  open.value = !open.value
+const openDropdown = (e: Event) => {
   e.stopPropagation()
+  open.value = true
 }
 </script>
 
@@ -31,7 +32,7 @@ const toggleDropdown = (e: Event) => {
 <div class="dropdown relative" :style="`height: ${height}px; width: ${width}px`" ref="dropdown">
   
   <!-- Dropdown trigger. Can be anything specified in the "name" slot -->
-  <div class="dropdown-trigger whitespace-nowrap  absolute z-0" ref="trigger" @click="toggleDropdown">
+  <div class="dropdown-trigger whitespace-nowrap  absolute z-0" ref="trigger" @click="openDropdown">
     <slot class="dropdown-trigger-text" name="name"  :style="`height: ${height}px; width: ${width}px`" />
   </div>
 
